@@ -1,0 +1,18 @@
+# Docsworth configuration (format 1). See docs/format-spec.md.
+format: 1
+knowledge_root: knowledge
+github:
+  # Team owners resolve to @acme/<team>.
+  org: acme
+  # GitHub is the ACL authority: reading needs a token with access to this repo.
+  repo: docsworth/acme-knowledge
+sla:
+  due_soon_days: 14
+usage_log: true
+# Every tool call is audited (page ids, no query text), so `docsworth usage-report` has
+# something to show once you've used the example. With no `dir`, the log is kept in your
+# state directory, outside this checkout.
+audit_log:
+  enabled: true
+skills:
+  out_dir: skills
