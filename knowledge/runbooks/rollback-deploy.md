@@ -17,10 +17,14 @@ description: Return a service to its previous version after a bad production dep
 ## Steps
 1. Find the previous good SHA with `shipyard history <service> --env prod`.
 2. Run `shipyard rollback <service> --env prod --to <sha>`; this skips the canary.
+   - If it refuses with `migration <name> is newer than <sha>`, the bad deploy shipped a
+     migration. Reverse it first with `shipyard migrate <service> --env prod --down <name>`,
+     then run the same rollback again.
 3. Announce the rollback in `#deploys` and in the incident channel if one is open.
 
 ## Checks
 - `shipyard status <service>` shows the previous SHA on every pod.
+- If you reversed a migration, it is no longer applied in prod before you rerun the rollback.
 - Error rate returns to its pre-deploy baseline within 5 minutes.
 
 ## Rollback
